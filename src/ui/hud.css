@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;600&display=swap');
+:root { --glass: rgba(14, 16, 22, 0.55); --line: rgba(255, 255, 255, 0.12); --txt: #e9ecf1; --accent: #6fa8ff; }
+.hud { position: fixed; inset: 0; pointer-events: none; font-family: Inter, system-ui, sans-serif; color: var(--txt); }
+.hud button { pointer-events: auto; font: inherit; color: inherit; cursor: pointer; }
+.title { position: absolute; top: 28px; left: 36px; text-shadow: 0 2px 20px #000; }
+.brand { font-family: Cinzel, serif; letter-spacing: 0.55em; font-size: 13px; opacity: 0.8; }
+.title h1 { margin: 4px 0 10px; font-family: Cinzel, serif; font-weight: 500; font-size: 38px; letter-spacing: 0.08em; }
+.specs { display: flex; gap: 18px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }
+.specs b { font-weight: 600; color: #fff; font-size: 14px; }
+.views { position: absolute; top: 30px; right: 30px; display: flex; gap: 6px; }
+.views button, .credits-btn { background: var(--glass); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; backdrop-filter: blur(14px); transition: all 0.25s; }
+.views button:hover, .credits-btn:hover { border-color: rgba(255,255,255,0.4); }
+.views button.on { background: rgba(111,168,255,0.22); border-color: var(--accent); }
+.controls { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 10px; background: var(--glass); border: 1px solid var(--line); border-radius: 18px; backdrop-filter: blur(18px) saturate(140%); box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08); pointer-events: auto; }
+.controls > button { display: flex; align-items: center; gap: 10px; padding: 12px 18px; border-radius: 12px; background: transparent; border: 1px solid transparent; font-size: 13px; letter-spacing: 0.04em; min-width: 150px; transition: all 0.25s; }
+.controls > button:hover { background: rgba(255,255,255,0.06); }
+.controls > button.on { background: linear-gradient(180deg, rgba(111,168,255,0.28), rgba(111,168,255,0.1)); border-color: rgba(111,168,255,0.55); box-shadow: 0 0 24px rgba(111,168,255,0.25); }
+.sep { width: 1px; align-self: stretch; background: var(--line); margin: 4px 6px; }
+.paints { display: flex; align-items: center; gap: 8px; padding: 0 8px; position: relative; }
+.swatch { width: 26px; height: 26px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.18); padding: 0; transition: transform 0.2s, border-color 0.2s; }
+.swatch:hover { transform: scale(1.12); }
+.swatch.on { border-color: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,0.12); }
+.paint-name { position: absolute; top: -30px; left: 0; right: 0; text-align: center; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7; white-space: nowrap; }
+.hint { position: absolute; bottom: 12px; left: 0; right: 0; text-align: center; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.45; }
+.credits-btn { position: absolute; bottom: 30px; right: 30px; }
+.credits { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: grid; place-items: center; pointer-events: auto; backdrop-filter: blur(6px); }
+.credits .card { max-width: 520px; background: rgba(16,18,24,0.92); border: 1px solid var(--line); border-radius: 16px; padding: 26px 30px; font-size: 13px; line-height: 1.6; }
+.credits h2 { font-family: Cinzel, serif; font-weight: 500; letter-spacing: 0.1em; margin-top: 0; }
+.credits a { color: var(--accent); }
+.credits .small { opacity: 0.6; font-size: 11px; }
+.credits .card button { background: #fff; color: #000; border: 0; border-radius: 999px; padding: 8px 20px; margin-top: 8px; }
+.loader { position: fixed; inset: 0; background: radial-gradient(ellipse at center, #10131b, #030406); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #e9ecf1; font-family: Inter, sans-serif; transition: opacity 0.9s; z-index: 10; }
+.loader.done { opacity: 0; pointer-events: none; }
+.loader-brand { font-family: Cinzel, serif; letter-spacing: 0.7em; font-size: 28px; margin-left: 0.7em; }
+.loader-model { letter-spacing: 0.4em; font-size: 11px; opacity: 0.6; margin: 10px 0 30px; }
+.loader-bar { width: 260px; height: 1px; background: rgba(255,255,255,0.15); overflow: hidden; }
+.loader-bar span { display: block; height: 100%; background: linear-gradient(90deg, #6fa8ff, #fff); transition: width 0.3s; }
+.loader-pct { margin-top: 12px; font-size: 10px; letter-spacing: 0.3em; opacity: 0.5; }
+@media (max-width: 900px) { .controls { flex-wrap: wrap; justify-content: center; width: calc(100vw - 40px); bottom: 20px; } .controls > button { min-width: 0; } .title h1 { font-size: 26px; } .views { top: auto; bottom: 190px; right: 50%; transform: translateX(50%); } }

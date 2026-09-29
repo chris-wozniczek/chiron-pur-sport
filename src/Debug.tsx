@@ -3,11 +3,12 @@ import { OrthographicCamera, useGLTF } from '@react-three/drei'
 import { useMemo } from 'react'
 import * as THREE from 'three'
 import { bakeCar, partition } from './scene/carParts'
-import { classifyBody } from './scene/regions'
+import { classifyBody, resolveDoor } from './scene/regions'
 
 const params = new URLSearchParams(location.search)
 const only = params.get('mat')
 const view = params.get('view') ?? 'side'
+const part = params.get('part')
 
 function DebugCar() {
   const { scene } = useGLTF(`${import.meta.env.BASE_URL}models/car/chiron_pur_sport.glb`)
@@ -20,11 +21,11 @@ function DebugCar() {
         if (only && !name.includes(only)) return null
         const { geometry } = bake.byMaterial.get(name)!
         const color = new THREE.Color().setHSL(i / names.length, 0.7, 0.5)
-        const parts = partition(geometry, classifyBody)
+        const parts = partition(geometry, classifyBody, (k, c, isl) => resolveDoor(name, k, c, isl))
         void color
-        return [...parts].map(([k, g]) => (
+        return [...parts].filter(([k]) => !part || k === part).map(([k, g]) => (
           <mesh key={name + k} geometry={g}>
-            {k === 'body' ? <meshNormalMaterial side={THREE.DoubleSide} /> : <meshBasicMaterial color={k === 'cover' ? 'yellow' : k === 'doorL' ? 'red' : 'orange'} side={THREE.DoubleSide} />}
+            {k === 'body' || part ? <meshNormalMaterial side={THREE.DoubleSide} /> : <meshBasicMaterial color={k === 'cover' ? 'yellow' : k === 'doorL' ? 'red' : 'orange'} side={THREE.DoubleSide} />}
           </mesh>
         ))
       })}
@@ -36,10 +37,10 @@ function DebugCar() {
 }
 
 export default function Debug() {
-  const pos: [number, number, number] = view === 'side' ? [10, 0.6, 0] : view === 'top' ? [0, 10, 0] : view === 'back' ? [0, 0.6, -10] : [0, 0.6, 10]
+  const pos: [number, number, number] = view === 'side' ? [10, 0.6, 0] : view === 'top' ? [0, 10, 0] : view === 'back' ? [0, 0.6, -10] : view === 'inside' ? [-10, 0.6, 0] : [0, 0.6, 10]
   return (
     <Canvas style={{ width: '100vw', height: '100vh', background: '#222' }}>
-      <OrthographicCamera makeDefault position={pos} zoom={170} up={view === 'top' ? [1, 0, 0] : [0, 1, 0]} onUpdate={(c) => c.lookAt(0, 0.6, 0)} />
+      <OrthographicCamera makeDefault position={pos} zoom={Number(params.get('zoom') ?? 170)} up={view === 'top' ? [1, 0, 0] : [0, 1, 0]} onUpdate={(c) => c.lookAt(0, 0.6, 0)} />
       <DebugCar />
     </Canvas>
   )

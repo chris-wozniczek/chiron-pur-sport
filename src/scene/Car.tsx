@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame, type ThreeEvent } from '@react-three/fiber'
 import { useLayoutEffect, useMemo, useRef } from 'react'
 import { bakeCar, partition, type PartKey } from './carParts'
-import { classifyBody } from './regions'
+import { classifyBody, resolveDoor } from './regions'
 import { Engine } from './Engine'
 
 export const CAR_URL = `${import.meta.env.BASE_URL}models/car/chiron_pur_sport.glb`
@@ -127,11 +127,7 @@ function buildCar(scene: THREE.Object3D): Built {
     }
     void carbon
     void headlight
-    const parts = name.includes('Wheel') || name.includes('Calliper') ? new Map([['body' as PartKey, geometry]]) : partition(geometry, (c) => {
-      const k = classifyBody(c)
-      if (k !== 'body' && name.includes('Interior') && Math.abs(c.x) < 0.78) return 'body'
-      return k
-    })
+    const parts = name.includes('Wheel') || name.includes('Calliper') ? new Map([['body' as PartKey, geometry]]) : partition(geometry, classifyBody, (k, c, isl) => resolveDoor(name, k, c, isl))
     for (const [key, g] of parts) {
       const mesh = new THREE.Mesh(g, mat)
       mesh.castShadow = !(mat as THREE.MeshPhysicalMaterial).transparent

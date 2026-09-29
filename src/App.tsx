@@ -70,9 +70,8 @@ export default function App() {
 
   const engineOn = state.engine
   const toggleEngine = useCallback(() => {
-    goto(engineOn ? 'hero' : 'engine')
     setState((s) => ({ ...s, engine: !engineOn }))
-  }, [goto, engineOn])
+  }, [engineOn])
 
   useEffect(() => {
     let raf = 0
@@ -143,9 +142,10 @@ export default function App() {
 }
 
 function InitialTarget({ onReady }: { onReady: () => void }) {
+  const ready = useRef(onReady)
   useEffect(() => {
-    const t = setTimeout(onReady, 0)
+    const t = setTimeout(() => ready.current(), 0)
     return () => clearTimeout(t)
-  }, [onReady])
+  }, [])
   return null
 }

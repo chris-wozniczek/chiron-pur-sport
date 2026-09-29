@@ -170,8 +170,8 @@ export function Car({ state, onEngineClick }: { state: CarState; onEngineClick: 
     a.cover = THREE.MathUtils.damp(a.cover, state.engine ? 1 : 0, 2.4, dt)
     a.light = THREE.MathUtils.damp(a.light, state.lights ? 1 : 0, 9, dt)
     const e = a.door * a.door * (3 - 2 * a.door)
-    if (doorL.current) doorL.current.rotation.set(0, e * 1.02, e * 0.07)
-    if (doorR.current) doorR.current.rotation.set(0, -e * 1.02, -e * 0.07)
+    if (doorL.current) doorL.current.rotation.set(0, -e * 1.02, e * 0.07)
+    if (doorR.current) doorR.current.rotation.set(0, e * 1.02, -e * 0.07)
     const c = a.cover * a.cover * (3 - 2 * a.cover)
     if (cover.current) cover.current.rotation.set(-c * 0.95, 0, 0)
     built.taillight.emissiveIntensity = 0.25 + a.light * 9

@@ -1,32 +1,29 @@
-# React + TypeScript + Vite
+# Bugatti Chiron Pur Sport — Night Showcase
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Interactive WebGL showcase of a Bugatti Chiron Pur Sport on a wet city street at night, built with React Three Fiber.
 
-Currently, two official plugins are available:
+Live: https://chris-wozniczek.github.io/chiron-pur-sport/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Controls
 
-## React Compiler
+- Drag to orbit 360°, scroll to zoom, or use the 360° spin button
+- Open / close doors, lights on / off, paint selection, camera presets
+- Click the rear deck (or "View engine") to raise the engine cover and reveal the W16 bay
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Development
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```sh
+npm ci
+npm run dev    # http://localhost:5173
+npm run build
+npm run lint
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Pushes to `main` deploy to GitHub Pages via `.github/workflows/pages.yml`.
+
+## Credits
+
+- Vehicle model: "2021 Bugatti Chiron Pur Sport" by Ddiaz Design (Sketchfab), CC BY-NC-SA 4.0 — modified (materials, door/engine-cover segmentation, procedural engine bay)
+- City assets, textures and HDRI: Poly Haven, CC0
+
+Fan-made, non-commercial project. Not affiliated with Bugatti.

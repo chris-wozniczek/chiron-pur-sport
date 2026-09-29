@@ -6,7 +6,7 @@ import { bakeCar, partition, type PartKey } from './carParts'
 import { classifyBody } from './regions'
 import { Engine } from './Engine'
 
-export const CAR_URL = '/models/car/chiron_pur_sport.glb'
+export const CAR_URL = `${import.meta.env.BASE_URL}models/car/chiron_pur_sport.glb`
 
 export interface Paint {
   name: string

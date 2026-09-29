@@ -10,7 +10,7 @@ const only = params.get('mat')
 const view = params.get('view') ?? 'side'
 
 function DebugCar() {
-  const { scene } = useGLTF('/models/car/chiron_pur_sport.glb')
+  const { scene } = useGLTF(`${import.meta.env.BASE_URL}models/car/chiron_pur_sport.glb`)
   const bake = useMemo(() => bakeCar(scene), [scene])
   const names = [...bake.byMaterial.keys()]
   console.log('BOX', JSON.stringify(bake.box), names)

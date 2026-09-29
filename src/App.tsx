@@ -101,7 +101,7 @@ export default function App() {
         }}
       >
         <Suspense fallback={null}>
-          <Environment files="/hdri/modern_buildings_night_2k.hdr" environmentIntensity={0.14} />
+          <Environment files={`${import.meta.env.BASE_URL}hdri/modern_buildings_night_2k.hdr`} environmentIntensity={0.14} />
           <ambientLight intensity={0.03} color="#8fa3ff" />
           <hemisphereLight args={['#1c2440', '#060504', 0.06]} />
           <Street />

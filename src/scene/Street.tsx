@@ -4,8 +4,8 @@ import { useFrame } from '@react-three/fiber'
 import { useLayoutEffect, useMemo, useRef } from 'react'
 import { mulberry } from './bake'
 
-const ENV = '/models/env/'
-const TEX = '/textures/'
+const ENV = `${import.meta.env.BASE_URL}models/env/`
+const TEX = `${import.meta.env.BASE_URL}textures/`
 
 function usePBR(name: string, rx: number, ry: number) {
   const t = useTexture({ map: `${TEX}${name}/diff.webp`, normalMap: `${TEX}${name}/nor.webp`, roughnessMap: `${TEX}${name}/rough.webp`, aoMap: `${TEX}${name}/arm.webp` })

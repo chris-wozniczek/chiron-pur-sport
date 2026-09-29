@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei'
 import { useMemo } from 'react'
 import { bakePlacements, compose, mulberry, type Placement } from './bake'
 
-const ENV = '/models/env/'
+const ENV = `${import.meta.env.BASE_URL}models/env/`
 
 interface Module {
   obj: THREE.Object3D
